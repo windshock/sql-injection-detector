@@ -35,8 +35,8 @@ cd sql-injection-detector
 
 ```kotlin
 dependencies {
-    implementation("com.windshock:sql-injection-detector:1.0.0")
-    testImplementation("com.windshock:sql-injection-detector:1.0.0")
+    implementation(project(":sql-injection-detector"))
+    testImplementation(project(":sql-injection-detector"))
 }
 ```
 
