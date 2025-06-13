@@ -1,6 +1,23 @@
 # SQL Injection Detector
 
-A static analysis tool that detects SQL injection vulnerabilities in Kotlin repositories using ANTLR-based AST analysis.
+🔧 **Shift Left Security Testing for Kotlin Applications**
+
+> "Bugs are cheap when caught young."
+
+## Why This Project?
+
+In the early 2000s, Larry Smith formalized "Shift Left Testing," arguing that quality assurance shouldn't be a late-stage blocker but part of development from the start. This principle has become even more crucial in security testing.
+
+While traditional security testing often happens late in the development cycle, this project brings SQL injection detection directly into your build process. By integrating security testing with your regular unit tests, we catch vulnerabilities early and make them part of your development workflow.
+
+### The Challenge
+
+Security teams often struggle to integrate with development tools, while developers find traditional security tools (AST/SAST/RAST) too heavy, noisy, and complex. This project bridges that gap by:
+
+1. Running security checks as part of your build-time tests
+2. Using familiar testing frameworks (JUnit)
+3. Providing clear, actionable results
+4. Requiring no external security tools or complex setup
 
 ## Features
 
