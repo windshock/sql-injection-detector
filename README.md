@@ -65,6 +65,39 @@ class YourRepositoryTest {
 3. **Vulnerability Detection**: Analyzes SQL queries for potential injection points
 4. **Report Generation**: Creates detailed reports of detected vulnerabilities
 
+## Core Logic & Implementation Details
+
+### 1. Automatic Repository Method Execution
+- The `AllRepositoriesBindingTest` class uses reflection to automatically execute all Repository methods
+- No need to write individual test cases—new Repository classes or methods are automatically included in validation
+- Provides comprehensive coverage without manual test maintenance
+
+### 2. DatabaseClient Wrapping for Binding Tracking
+- At build-time test execution, the DatabaseClient is wrapped with `TrackingDatabaseClient`
+- Records parameter name, value, and call location for each `.bind()` call during query execution
+- Seamlessly integrates with normal query flow—just running the test triggers full binding tracking
+
+### 3. Precise Analysis of Unbound Parameters
+- Compares declared parameters against actually bound variables during execution
+- Extracts and analyzes only unbound parameters
+- Normalizes parameter names (lowercase, underscore removal) for precise SQL parameter matching
+
+### 4. In-Test Kotlin AST Analysis
+- Performs Kotlin AST analysis directly within test code
+- Uses official Kotlin ANTLR grammar embedded in the project
+- No external tools required for analysis
+
+### 5. Accurate Vulnerability Reporting
+- Reports SQL injection vulnerabilities only when unbound parameters are directly inserted into query strings via:
+  - String concatenation (+)
+  - String templates ($)
+  - `.toString()`, `.append()`, etc.
+- Automatically ignores false positives from:
+  - Control flow
+  - Conditional logic
+  - Query composition
+  - Other non-injection cases
+
 ## ANTLR Grammar & Customization
 
 The project uses ANTLR for parsing Kotlin source code. The ANTLR parser/lexer files are generated in the `src/main/java/com/windshock/security/` directory during the build process. Grammar files are not provided separately as they are included in the build dependencies.
