@@ -162,3 +162,63 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc) - Reactive database access
 - [Kotlin](https://kotlinlang.org/) - Programming language
 - [Kotlin Grammar](https://github.com/Kotlin/kotlin-spec/tree/release/grammar/src/main/antlr) - Kotlin language grammar specification used for AST analysis
+
+## SQL Injection 취약점을 감지하는 테스트 프레임워크입니다.
+
+## 주요 기능
+
+- Spring Data R2DBC Repository의 SQL Injection 취약점 감지
+- 정적 분석을 통한 취약점 패턴 검사
+- 취약점 발견 시 상세한 리포트 생성
+
+## 사용 방법
+
+1. 의존성 추가:
+```kotlin
+dependencies {
+    testImplementation("com.windshock:sql-injection-detector:1.0.0")
+}
+```
+
+2. 테스트 클래스에 어노테이션 추가:
+```kotlin
+@SqlInjectionTest
+class YourRepositoryTest {
+    // 테스트 코드
+}
+```
+
+## 취약점 패턴
+
+현재 감지 가능한 취약점 패턴:
+- 직접적인 문자열 연결 (`+`, `$`)
+- 템플릿 리터럴 사용 (`${param}`)
+- 직접적인 파라미터 삽입 (`' + param`)
+
+## 향후 개발이 필요한 사항
+
+1. **동적 분석 도구 통합**
+   - Jazzer와 같은 fuzzing 도구를 활용한 동적 분석 추가
+   - SQL 생성 유틸리티(`Utils.toSql` 등)에 대한 집중적인 fuzzing 테스트
+   - 실제 실행 시점의 취약점 발견
+
+2. **SafeSqlUtils 개발**
+   - SQL 생성 유틸리티를 안전한 버전으로 분리
+   - 파라미터 바인딩, PreparedStatement 등 안전한 SQL 생성 패턴 적용
+   - 개발자 가이드라인 작성
+
+3. **테스트 커버리지 확장**
+   - 더 복잡한 SQL Injection 패턴 감지
+   - 다양한 데이터베이스 드라이버 지원
+   - 실제 프로덕션 환경에서의 테스트 케이스 추가
+
+## 기여 방법
+
+1. 이슈 생성
+2. 브랜치 생성
+3. 변경사항 커밋
+4. Pull Request 생성
+
+## 라이선스
+
+MIT License
