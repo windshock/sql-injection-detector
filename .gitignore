@@ -1,0 +1,10 @@
+/build
+/.idea
+*.iml
+.gradle
+*.log
+*.class
+*.jar
+*.war
+*.zip
+*.db
