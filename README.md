@@ -35,8 +35,8 @@ cd sql-injection-detector
 
 ```kotlin
 dependencies {
-    implementation("com.example:sql-injection-detector:1.0.0")
-    testImplementation("com.example:sql-injection-detector:1.0.0")
+    implementation("com.windshock:sql-injection-detector:1.0.0")
+    testImplementation("com.windshock:sql-injection-detector:1.0.0")
 }
 ```
 
@@ -67,7 +67,7 @@ class YourRepositoryTest {
 
 ## ANTLR Grammar & Customization
 
-The project uses ANTLR for parsing Kotlin source code. The ANTLR parser/lexer files are generated in the `src/main/java/com/example/security/` directory during the build process. Grammar files are not provided separately as they are included in the build dependencies.
+The project uses ANTLR for parsing Kotlin source code. The ANTLR parser/lexer files are generated in the `src/main/java/com/windshock/security/` directory during the build process. Grammar files are not provided separately as they are included in the build dependencies.
 
 To regenerate the parser/lexer files, run:
 ```bash
@@ -81,16 +81,16 @@ sql-injection-detector/
 ├── src/
 │   ├── main/
 │   │   ├── kotlin/
-│   │   │   └── com/example/
+│   │   │   └── com/windshock/
 │   │   │       ├── repository/     # Repository interfaces
 │   │   │       └── security/       # Security analysis tools
 │   │   └── java/
-│   │       └── com/example/security/
+│   │       └── com/windshock/security/
 │   │           ├── KotlinLexer.java    # Generated ANTLR lexer
 │   │           └── KotlinParser.java   # Generated ANTLR parser
 │   └── test/
 │       └── kotlin/
-│           └── com/example/security/   # Test cases
+│           └── com/windshock/security/   # Test cases
 └── build.gradle.kts
 ```
 

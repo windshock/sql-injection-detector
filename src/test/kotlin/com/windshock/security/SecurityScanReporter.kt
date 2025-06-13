@@ -2,8 +2,6 @@ package com.windshock.security
 
 import com.windshock.security.RiskLevel
 import java.io.File
-// import com.skplanet.pcona.console.repository.VulnerabilityReport // Uncomment if needed
-// import com.skplanet.pcona.console.repository.RepositoryScanResult // Uncomment if needed
 
 class SecurityScanReporter(private val results: List<RepositoryScanResult>) {
     private fun printVulnerabilitySource(v: VulnerabilityReport) {
@@ -11,7 +9,7 @@ class SecurityScanReporter(private val results: List<RepositoryScanResult>) {
             val filePath = try {
                 val projectRoot = System.getProperty("user.dir")
                 val sourceRoot = "$projectRoot/src/main/kotlin"
-                val fullClassName = if (v.className.contains('.')) v.className else "com.example.repository.${v.className}"
+                val fullClassName = if (v.className.contains('.')) v.className else "com.windshock.repository.${v.className}"
                 val className = fullClassName.replace('.', '/')
                 val sourceFile = File("$sourceRoot/$className.kt")
                 if (sourceFile.exists()) {
@@ -47,7 +45,7 @@ class SecurityScanReporter(private val results: List<RepositoryScanResult>) {
                 }
             } catch (e: Exception) {
                 val projectRoot = System.getProperty("user.dir")
-                val fullClassName = if (v.className.contains('.')) v.className else "com.example.repository.${v.className}"
+                val fullClassName = if (v.className.contains('.')) v.className else "com.windshock.repository.${v.className}"
                 "$projectRoot/src/main/kotlin/${fullClassName.replace('.', '/')}.kt"
             }
             val file = java.io.File(filePath)

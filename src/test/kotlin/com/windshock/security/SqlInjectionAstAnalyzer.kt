@@ -32,7 +32,7 @@ object SqlInjectionAstAnalyzer {
             val vulnerabilities = mutableListOf<VulnerabilityReport>()
 
             // 1. 토큰 기반 위험 탐지 (execute/sql, +, $, bind)
-            val lexer: KotlinLexer = com.example.security.KotlinLexer(org.antlr.v4.runtime.CharStreams.fromString(source))
+            val lexer: KotlinLexer = com.windshock.security.KotlinLexer(org.antlr.v4.runtime.CharStreams.fromString(source))
             val tokens: org.antlr.v4.runtime.CommonTokenStream = org.antlr.v4.runtime.CommonTokenStream(lexer)
             tokens.fill()
             val tokenTexts: MutableList<String> = mutableListOf<String>()

@@ -1,10 +1,10 @@
 // Generated from KotlinParser.g4 by ANTLR 4.13.2
-package com.example.security;
+package com.windshock.security;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
-import com.example.security.KotlinParser;
+import com.windshock.security.KotlinParser;
 /**
  * This class provides an empty implementation of {@link KotlinParserListener},
  * which can be extended to create a listener which only needs to handle a subset

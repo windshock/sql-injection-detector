@@ -1,4 +1,4 @@
-package com.example.security;
+package com.windshock.security;
 // Generated from KotlinLexer.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;

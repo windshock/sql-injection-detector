@@ -1,8 +1,8 @@
 // Generated from KotlinParser.g4 by ANTLR 4.13.2
-package com.example.security;
+package com.windshock.security;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
-import com.example.security.KotlinParser;
+import com.windshock.security.KotlinParser;
 
 /**
  * This interface defines a complete listener for a parse tree produced by

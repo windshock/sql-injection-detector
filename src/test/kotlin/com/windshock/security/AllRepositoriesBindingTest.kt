@@ -76,7 +76,7 @@ class AllRepositoriesBindingTest {
         val repoClasses = mutableListOf<KClass<*>>()
 
         // Scan all classes in the classpath for @Repository annotation
-        val packageNames = setOf("com.example", "org.springframework.data")
+        val packageNames = setOf("com.windshock", "org.springframework.data")
         packageNames.forEach { pkg ->
             val path = pkg.replace('.', '/')
             val resources = classLoader.getResources(path)
