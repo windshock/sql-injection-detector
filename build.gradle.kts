@@ -10,7 +10,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-group = "com.example.security"
+group = "com.windshock.security"
 version = "1.0.0"
 
 repositories {

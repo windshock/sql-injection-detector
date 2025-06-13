@@ -1,12 +1,12 @@
-package com.example.security
+package com.windshock.security
 
 import java.io.File
 import java.io.BufferedReader
 import java.io.FileReader
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
-import com.example.security.KotlinLexer
-import com.example.security.KotlinParser
+import com.windshock.security.KotlinLexer
+import com.windshock.security.KotlinParser
 import org.antlr.v4.runtime.tree.ParseTree
 import org.antlr.v4.runtime.Token
 

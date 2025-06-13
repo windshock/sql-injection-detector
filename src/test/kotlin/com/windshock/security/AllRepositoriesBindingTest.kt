@@ -1,6 +1,6 @@
-package com.example.security
+package com.windshock.security
 
-import com.example.security.SecurityScanReporter
+import com.windshock.security.SecurityScanReporter
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.AfterEach
@@ -10,8 +10,8 @@ import kotlin.reflect.KType
 import kotlin.reflect.KVisibility
 import kotlin.reflect.full.*
 import kotlin.reflect.jvm.jvmErasure
-import com.example.security.DummyValueFactory
-import com.example.security.RiskLevel
+import com.windshock.security.DummyValueFactory
+import com.windshock.security.RiskLevel
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.junit.jupiter.api.extension.ExtendWith

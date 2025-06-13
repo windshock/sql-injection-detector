@@ -1,4 +1,4 @@
-package com.example.security
+package com.windshock.security
 
 import org.springframework.data.r2dbc.core.DatabaseClient
 

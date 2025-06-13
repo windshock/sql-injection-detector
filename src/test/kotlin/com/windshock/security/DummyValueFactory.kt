@@ -1,4 +1,4 @@
-package com.example.security
+package com.windshock.security
 
 import kotlin.reflect.KType
 import kotlin.reflect.full.createInstance

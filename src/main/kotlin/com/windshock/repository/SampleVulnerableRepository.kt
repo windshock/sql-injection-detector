@@ -1,4 +1,4 @@
-package com.example.repository
+package com.windshock.repository
 
 import org.springframework.stereotype.Repository
 import org.springframework.data.r2dbc.core.DatabaseClient

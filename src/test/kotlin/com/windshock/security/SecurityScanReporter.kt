@@ -1,6 +1,6 @@
-package com.example.security
+package com.windshock.security
 
-import com.example.security.RiskLevel
+import com.windshock.security.RiskLevel
 import java.io.File
 // import com.skplanet.pcona.console.repository.VulnerabilityReport // Uncomment if needed
 // import com.skplanet.pcona.console.repository.RepositoryScanResult // Uncomment if needed

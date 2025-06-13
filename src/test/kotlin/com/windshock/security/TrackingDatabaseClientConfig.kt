@@ -1,4 +1,4 @@
-package com.example.security
+package com.windshock.security
 
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean

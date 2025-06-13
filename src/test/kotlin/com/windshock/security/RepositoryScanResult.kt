@@ -1,4 +1,4 @@
-package com.example.security
+package com.windshock.security
 
 data class RepositoryScanResult(
     val repositoryName: String,
