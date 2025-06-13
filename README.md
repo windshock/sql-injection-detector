@@ -1,36 +1,98 @@
 # SQL Injection Detector
 
-A test framework for detecting SQL Injection vulnerabilities in Spring Data R2DBC repositories.
+A static analysis tool that detects SQL injection vulnerabilities in Kotlin repositories using ANTLR-based AST analysis.
 
 ## Features
 
-- Detects SQL Injection vulnerabilities in Spring Data R2DBC repositories
-- Performs static analysis to identify vulnerability patterns
-- Generates detailed reports when vulnerabilities are found
+- Static analysis of Kotlin source code using ANTLR
+- Detection of SQL injection vulnerabilities in repository methods
+- Support for Spring Data R2DBC repositories
+- Detailed vulnerability reports with risk levels
+- Test coverage for security analysis
+
+## Prerequisites
+
+- JDK 17 or higher
+- Gradle 8.0 or higher
+- Kotlin 1.8.0 or higher
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/sql-injection-detector.git
+cd sql-injection-detector
+```
+
+2. Build the project:
+```bash
+./gradlew build
+```
 
 ## Usage
 
-1. Add dependency:
+1. Add the following dependencies to your project's `build.gradle.kts`:
+
 ```kotlin
 dependencies {
-    testImplementation("com.windshock:sql-injection-detector:1.0.0")
+    implementation("com.example:sql-injection-detector:1.0.0")
+    testImplementation("com.example:sql-injection-detector:1.0.0")
 }
 ```
 
-2. Add annotation to your test class:
+2. Create a test class to scan your repositories:
+
 ```kotlin
-@SqlInjectionTest
+@SpringBootTest
 class YourRepositoryTest {
-    // test code
+    @Autowired
+    private lateinit var sqlInjectionAnalyzer: SqlInjectionAstAnalyzer
+    
+    @Test
+    fun testSqlInjection() {
+        val result = sqlInjectionAnalyzer.analyzeRepositories()
+        assert(result.vulnerabilities.isEmpty()) {
+            "SQL injection vulnerabilities detected: ${result.vulnerabilities}"
+        }
+    }
 }
 ```
 
-## Vulnerability Patterns
+## How It Works
 
-Currently detectable vulnerability patterns:
-- Direct string concatenation (`+`, `$`)
-- Template literal usage (`${param}`)
-- Direct parameter insertion (`' + param`)
+1. **AST Analysis**: Uses ANTLR to parse Kotlin source code and generate an Abstract Syntax Tree (AST)
+2. **Repository Scanning**: Identifies repository interfaces and their methods
+3. **Vulnerability Detection**: Analyzes SQL queries for potential injection points
+4. **Report Generation**: Creates detailed reports of detected vulnerabilities
+
+## ANTLR Grammar & Customization
+
+The project uses ANTLR for parsing Kotlin source code. The ANTLR parser/lexer files are generated in the `src/main/java/com/example/security/` directory during the build process. Grammar files are not provided separately as they are included in the build dependencies.
+
+To regenerate the parser/lexer files, run:
+```bash
+./gradlew generateGrammarSource
+```
+
+## Module Structure
+
+```
+sql-injection-detector/
+├── src/
+│   ├── main/
+│   │   ├── kotlin/
+│   │   │   └── com/example/
+│   │   │       ├── repository/     # Repository interfaces
+│   │   │       └── security/       # Security analysis tools
+│   │   └── java/
+│   │       └── com/example/security/
+│   │           ├── KotlinLexer.java    # Generated ANTLR lexer
+│   │           └── KotlinParser.java   # Generated ANTLR parser
+│   └── test/
+│       └── kotlin/
+│           └── com/example/security/   # Test cases
+└── build.gradle.kts
+```
 
 ## Future Development Plans
 
@@ -51,11 +113,19 @@ Currently detectable vulnerability patterns:
 
 ## Contributing
 
-1. Create an issue
-2. Create a branch
-3. Commit changes
-4. Create a Pull Request
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
 ## License
 
-MIT License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [ANTLR](https://www.antlr.org/) - Parser generator
+- [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc) - Reactive database access
+- [Kotlin](https://kotlinlang.org/) - Programming language
+- [Kotlin Grammar](https://github.com/Kotlin/kotlin-spec/tree/release/grammar/src/main/antlr) - Kotlin language grammar specification used for AST analysis
