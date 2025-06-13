@@ -111,3 +111,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [ANTLR](https://www.antlr.org/) - Parser generator
 - [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc) - Reactive database access
 - [Kotlin](https://kotlinlang.org/) - Programming language
+- [Kotlin Grammar](https://github.com/Kotlin/kotlin-spec/tree/release/grammar/src/main/antlr) - Kotlin language grammar specification used for AST analysis
