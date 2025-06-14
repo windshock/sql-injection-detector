@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.0"
     id("antlr")
+    `maven-publish`
 }
 
 kotlin {
@@ -46,4 +47,12 @@ sourceSets["main"].java.srcDir("build/generated-src/antlr/main")
 
 tasks.named("compileTestKotlin") {
     dependsOn("generateTestGrammarSource")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+        }
+    }
 }
