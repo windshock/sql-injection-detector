@@ -27,37 +27,107 @@ Security teams often struggle to integrate with development tools, while develop
 - Detailed vulnerability reports with risk levels
 - Test coverage for security analysis
 
+## Overview
+
+SQL Injection Detector is a static analysis tool for Kotlin projects, designed to detect SQL injection vulnerabilities in Spring Data R2DBC repositories. It integrates with your build and test process, enabling early detection of security issues.
+
 ## Prerequisites
 
 - JDK 17 or higher
-- Gradle 8.0 or higher
-- Kotlin 1.8.0 or higher
+- Gradle 8.0+ or Maven
+- Kotlin 1.8.0+
 
-## Installation
+## Publishing to Local Maven
 
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/sql-injection-detector.git
-cd sql-injection-detector
+This library is not distributed via Maven Central.  
+To use it in your projects, you must first publish it to your local Maven repository:
+
+```sh
+./gradlew publishToMavenLocal
 ```
 
-2. Build the project:
-```bash
-./gradlew build
-```
+## Adding the Dependency
 
-## Usage
+After publishing, add the dependency to your project:
 
-1. Add the following dependencies to your project's `build.gradle.kts`:
-
+### Gradle (Kotlin DSL)
 ```kotlin
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
 dependencies {
-    implementation(project(":sql-injection-detector"))
-    testImplementation(project(":sql-injection-detector"))
+    testImplementation("com.windshock.security:sql-injection-detector:1.0.0")
 }
 ```
 
-2. Create a test class to scan your repositories:
+### Maven
+```xml
+<repositories>
+    <repository>
+        <id>local</id>
+        <url>file://${user.home}/.m2/repository</url>
+    </repository>
+    <repository>
+        <id>central</id>
+        <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+</repositories>
+
+<dependency>
+    <groupId>com.windshock.security</groupId>
+    <artifactId>sql-injection-detector</artifactId>
+    <version>1.0.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+## Usage Example
+
+Create a test class in your Spring Data R2DBC project:
+
+```kotlin
+import com.windshock.security.SqlInjectionTestRunner
+import com.windshock.security.TrackingDatabaseClientConfig
+import org.junit.jupiter.api.Test
+import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest
+import org.springframework.context.annotation.Import
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.ApplicationContext
+
+@DataR2dbcTest
+@Import(TrackingDatabaseClientConfig::class)
+class RepositorySqlInjectionSpringTest {
+    @Autowired
+    lateinit var applicationContext: ApplicationContext
+
+    @Test
+    fun scanAllRepositories() {
+        SqlInjectionTestRunner.scanRepositories("com.yourcompany.yourpackage.repository", applicationContext)
+    }
+}
+```
+
+Run this test to scan all repositories in the specified package for SQL injection vulnerabilities. Results will be reported in the test output.
+
+## Project Structure (Example)
+
+```
+src/
+  main/
+    kotlin/
+      com/
+        windshock/
+          security/
+            SqlInjectionTestRunner.kt
+            TrackingDatabaseClientConfig.kt
+            ...
+```
+
+## License
+
+[Specify your license here]
 
 ```kotlin
 @SpringBootTest
